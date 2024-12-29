@@ -2,12 +2,11 @@ import React, { useState, useEffect } from "react";
 import "./weather.css";
 
 const WeatherTable = () => {
-  const [location, setLocation] = useState("India"); // Default location
-  const [weatherData, setWeatherData] = useState([]); // Data to display
-  const [loading, setLoading] = useState(false); // Loading state
-  const [error, setError] = useState(null); // Error state
+  const [location, setLocation] = useState("India");
+  const [weatherData, setWeatherData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  // Function to fetch weather data
   const fetchWeatherData = async (location) => {
     try {
       setLoading(true);
