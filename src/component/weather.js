@@ -11,13 +11,16 @@ const WeatherTable = () => {
     try {
       setLoading(true);
       setError(null);
-      const response = await fetch("http://localhost:5000/api/weather/data", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ location }),
-      });
+      const response = await fetch(
+        "https://weather-finance-track-bkyl.vercel.app/api/weather/data",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ location }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to fetch data");

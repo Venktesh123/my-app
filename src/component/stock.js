@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Chart from "react-apexcharts";
-import "./StockChart.css";
+import "./stockChart.css";
 
 const StockChart = () => {
   const [stockData, setStockData] = useState([]);
@@ -20,7 +20,7 @@ const StockChart = () => {
     setError("");
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/stock/data",
+        "https://weather-finance-track-bkyl.vercel.app/api/stock/data",
         {
           company,
         }
