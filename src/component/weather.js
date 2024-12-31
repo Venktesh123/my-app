@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./weather.css";
 
 const WeatherTable = () => {
@@ -6,7 +6,7 @@ const WeatherTable = () => {
   const [weatherData, setWeatherData] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const fetchWeatherData = async (location) => {
+  const fetchWeatherData = async () => {
     try {
       setLoading(true);
       const response = await fetch(
@@ -40,19 +40,9 @@ const WeatherTable = () => {
     }
   };
 
-  // Handle location input change
   const handleInputChange = (e) => {
-    const newLocation = e.target.value;
-    setLocation(newLocation);
-    if (newLocation.trim()) {
-      fetchWeatherData(newLocation);
-    }
+    setLocation(e.target.value);
   };
-
-  // Initial data fetch
-  useEffect(() => {
-    fetchWeatherData(location);
-  }, []);
 
   return (
     <div className="weather-container">
@@ -64,6 +54,9 @@ const WeatherTable = () => {
         onChange={handleInputChange}
         className="location-input"
       />
+      <button onClick={fetchWeatherData} className="fetch-button">
+        Get Weather
+      </button>
       {loading && <p className="loading-text">Loading...</p>}
       {!loading && weatherData.length > 0 && (
         <table className="weather-table">
