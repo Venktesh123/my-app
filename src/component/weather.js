@@ -5,12 +5,10 @@ const WeatherTable = () => {
   const [location, setLocation] = useState("India");
   const [weatherData, setWeatherData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
 
   const fetchWeatherData = async (location) => {
     try {
       setLoading(true);
-      setError(null);
       const response = await fetch(
         "https://weather-finance-track-bkyl.vercel.app/api/weather/data",
         {
@@ -27,14 +25,15 @@ const WeatherTable = () => {
       }
 
       const result = await response.json();
+
       if (result.success) {
         setWeatherData(result.data);
       } else {
-        setError("No data found");
+        console.error("No data found");
         setWeatherData([]);
       }
     } catch (error) {
-      setError(error.message);
+      console.error(error.message);
       setWeatherData([]);
     } finally {
       setLoading(false);
@@ -66,7 +65,6 @@ const WeatherTable = () => {
         className="location-input"
       />
       {loading && <p className="loading-text">Loading...</p>}
-      {error && <p className="error-text">{error}</p>}
       {!loading && weatherData.length > 0 && (
         <table className="weather-table">
           <thead>
