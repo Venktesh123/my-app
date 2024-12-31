@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./weather.css";
 
 const WeatherTable = () => {
@@ -6,7 +6,7 @@ const WeatherTable = () => {
   const [weatherData, setWeatherData] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const fetchWeatherData = async () => {
+  const fetchWeatherData = async (location) => {
     try {
       setLoading(true);
       const response = await fetch(
@@ -44,6 +44,11 @@ const WeatherTable = () => {
     setLocation(e.target.value);
   };
 
+  // Fetch default weather data for India when the component mounts
+  useEffect(() => {
+    fetchWeatherData(location);
+  }, []);
+
   return (
     <div className="weather-container">
       <h1>Weather Data</h1>
@@ -54,7 +59,10 @@ const WeatherTable = () => {
         onChange={handleInputChange}
         className="location-input"
       />
-      <button onClick={fetchWeatherData} className="fetch-button">
+      <button
+        onClick={() => fetchWeatherData(location)}
+        className="fetch-button"
+      >
         Get Weather
       </button>
       {loading && <p className="loading-text">Loading...</p>}
