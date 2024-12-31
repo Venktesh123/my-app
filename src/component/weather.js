@@ -71,7 +71,6 @@ const WeatherTable = () => {
         <table className="weather-table">
           <thead>
             <tr>
-              <th>ID</th>
               <th>Main</th>
               <th>Description</th>
               <th>Icon</th>
@@ -80,7 +79,6 @@ const WeatherTable = () => {
           <tbody>
             {weatherData.map((item) => (
               <tr key={item.id}>
-                <td>{item.id}</td>
                 <td>{item.main}</td>
                 <td>{item.description}</td>
                 <td>
